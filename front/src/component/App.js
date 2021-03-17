@@ -59,6 +59,8 @@ class App extends Component {
         ):(
           <Button variant="contained" color="secondary" onClick={this.infoWindowClose}>にっき場所場所選択</Button>
         )}
+          <Button variant="contained" color="secondary" onClick={this.infoWindowClose}>みんなのにっきの表示</Button>
+          <Button variant="contained" color="secondary" onClick={this.infoWindowClose}>お気に入りのにっきを表示</Button>
 
       </LoadScript>
     )
