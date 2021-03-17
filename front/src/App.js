@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import Place from './Place';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const containerStyle = {
+  width: '400px',
+  height: '400px'
+};
+
+const center = {
+  lat: 36,
+  lng: 138
+};
+
+class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      position: {"lat": 36, "lng": 138},
+    };
+    this.onMarkerClick = this.onMarkerClick.bind(this);
+  }
+
+  onMarkerClick = (props) => {
+    let item = { lat: props.latLng.lat()};
+    item.lng = props.latLng.lng();
+    this.setState({ position: item })
+  };
+
+  render() {
+    return (
+      <LoadScript
+        googleMapsApiKey="API_KEY"
+      >
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={5}
+          onClick={this.onMarkerClick}
+          >
+          <Place position={this.state.position} />
+        </GoogleMap>
+      </LoadScript>
+    )
+  }
 }
-
 export default App;
