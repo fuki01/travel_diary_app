@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import Place from './Place';
-import { Button } from '@material-ui/core';
-
+import { Button, Box } from '@material-ui/core';
+import '../../style/mainPage.css'
 const containerStyle = {
   width: '100%',
-  height: '800px'
+  height: '700px'
 };
 
 const center = {
@@ -55,13 +55,23 @@ class Main extends Component {
             <Place position={this.state.position} />
             )}
         </GoogleMap>
+        <Box display="flex" justifyContent="center" m={1} p={1} bgcolor="background.paper">
         {this.state.infoWindowClose ?(
-          <Button variant="contained" color="secondary" onClick={this.infoWindowClose}>にっき場所取り消し</Button>
+          <Box m={2}>
+          <Button variant="contained" color="secondary" m={10} onClick={this.infoWindowClose}>にっき場所取り消し</Button>
+          </Box>
         ):(
+          <Box m={2}>
           <Button variant="contained" color="secondary" onClick={this.infoWindowClose}>にっき場所場所選択</Button>
+          </Box>
         )}
-          <Button variant="contained" color="secondary" onClick={this.infoWindowClose}>みんなのにっきの表示</Button>
-          <Button variant="contained" color="secondary" onClick={this.infoWindowClose}>お気に入りのにっきを表示</Button>
+          <Box m={2}>
+          <Button variant="contained" color="secondary" m={10} onClick={this.infoWindowClose}>みんなのにっきの表示</Button>
+          </Box>
+          <Box m={2}>
+          <Button variant="contained" color="secondary" m={10} onClick={this.infoWindowClose}>お気に入りのにっきを表示</Button>
+          </Box>
+        </Box>
 
       </LoadScript>
     )
