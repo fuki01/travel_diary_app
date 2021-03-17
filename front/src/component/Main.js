@@ -13,7 +13,7 @@ const center = {
   lng: 138
 };
 
-class App extends Component {
+class Main extends Component {
   constructor(){
     super();
     this.state = {
@@ -66,4 +66,4 @@ class App extends Component {
     )
   }
 }
-export default App;
+export default Main;
