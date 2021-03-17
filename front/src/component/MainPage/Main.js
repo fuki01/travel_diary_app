@@ -14,6 +14,7 @@ const center = {
   lng: 138
 };
 
+
 class Main extends Component {
   constructor(){
     super();
@@ -43,7 +44,7 @@ class Main extends Component {
   render() {
     return (
         <LoadScript
-          googleMapsApiKey="AIzaSyBvIbttKIf9VoZRberZuBxQb759JtffdxU"
+          googleMapsApiKey={process.env.REACT_APP_DEV_API_KEY}
         >
         <GoogleMap
           mapContainerStyle={containerStyle}
