@@ -1,11 +1,8 @@
 import React from "react";
 import { InfoWindow} from "@react-google-maps/api";
 import { Button } from "@material-ui/core";
-// import PlaceStyle from '../style/Place.css';
+
 class Place extends React.Component{
-  constructor(props){
-    super(props);
-  }
   render(){
     return(
       <div>
