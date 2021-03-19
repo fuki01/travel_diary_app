@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import Place from './Place';
 import { Button, Box } from '@material-ui/core';
+import Geocode from "react-geocode";
 import '../../style/mainPage.css'
 const containerStyle = {
   width: '100%',
@@ -14,12 +15,14 @@ const center = {
   lng: 138
 };
 
+
 class Main extends Component {
   constructor(){
     super();
     this.state = {
       position: {"lat": 36, "lng": 138},
       infoWindowClose: false,
+      address: "",
     };
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.infoWindowClose = this.infoWindowClose.bind(this);
@@ -30,7 +33,23 @@ class Main extends Component {
     let item = { lat: props.latLng.lat()};
     item.lng = props.latLng.lng();
     this.setState({ position: item })
+    this.decode();
   };
+
+  decode(){
+    Geocode.setApiKey(process.env.REACT_APP_DEV_API_KEY);
+    Geocode.setLanguage("ja");
+    Geocode.fromLatLng(this.state.position.lat, this.state.position.lng).then(
+      (response) => {
+        const address = response.results[0].formatted_address;
+        this.setState({address: address});
+        console.log(address);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
   
   infoWindowClose = (props) => {
     if (this.state.infoWindowClose) {
@@ -43,7 +62,7 @@ class Main extends Component {
   render() {
     return (
         <LoadScript
-          googleMapsApiKey="AIzaSyBvIbttKIf9VoZRberZuBxQb759JtffdxU"
+          googleMapsApiKey={process.env.REACT_APP_DEV_API_KEY}
         >
         <GoogleMap
           mapContainerStyle={containerStyle}
@@ -52,7 +71,7 @@ class Main extends Component {
           onClick={this.onMarkerClick}
           >
           {this.state.infoWindowClose && (
-            <Place position={this.state.position} />
+            <Place position={this.state.position} address={this.state.address}/>
             )}
         </GoogleMap>
         <Box display="flex" justifyContent="center" m={1} p={1} bgcolor="background.paper">

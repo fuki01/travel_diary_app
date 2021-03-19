@@ -7,7 +7,7 @@ class Header extends Component {
     return(
       <AppBar position="static" color='secondary'>
         <Toolbar>
-            News
+        travel_diary
         </Toolbar>
       </AppBar>
     )
